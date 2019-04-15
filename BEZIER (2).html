@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+
+
+        }
+    
+        div{
+            border-radius: 50%;
+            width:30px;
+            height:30px;
+            position: absolute;
+        }
+        
+        #cnt1{
+                    background-color:rgb(9, 231, 220);
+                    position: absolute;
+                    top:40px;
+                    left:440px;
+         }
+         #cnt2{
+                    position:absolute;
+                    left:1190px;
+                    top:790px;
+                    background-color:rgb(245, 73, 179);
+         }
+         
+         #int1{
+                    position:absolute;
+                    left:0px;
+                    top:390px;
+                    background-color:black;
+         }
+         #int2{
+                    position:absolute;
+                    left:1490px;
+                    top:390px;
+                    background-color:black;
+         }
+         
+    </style>
+
+</head>
+<body>
+<h2 style="display:inline-block; float:right; margin-right: 150px; font-family: Cambria; font-size: 50px; color: rgb(13, 197, 243)">BEZIER CURVE</h2>
+<canvas id="myCanvas" width="1000" height="700" style="border:5px solid #0dd4db; position:absolute; display: inline-block;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+    
+<div id="cnt1" width="20" height="20" onmousedown = "down1()">
+</div>
+
+<div id="cnt2" width="30" height="30" onmousedown = "down2()">
+</div>
+
+
+<div id="int1" width="30" height="30" onmousedown = "down3()">
+</div>
+
+<div id="int2" width="30" height="30" onmousedown = "down4()">
+</div>
+
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+var control1 = document.getElementById("cnt1");
+var control2 = document.getElementById("cnt2");
+
+var int1 = document.getElementById("int1");
+var int2 = document.getElementById("int2");
+
+var startx = 0;
+var starty = 350;
+
+
+var endx = 1000;
+var endy = 350;
+
+
+
+var x1 = 450, 
+    y1 = 50,   
+    x2 = 300,
+    y2 = 600;
+    
+   
+function down1(e){  
+   canvas.onmousemove = function(e){
+      x1 =     e.clientX; 
+      y1 =     e.clientY;
+       draw();  
+   }
+    control1.onmousedown = down11;
+    
+}
+
+function down11(e){
+	canvas.onmousemove = null;
+	control1.onmousedown = down1;
+	
+}
+
+
+
+
+
+
+function down2(e){  
+   canvas.onmousemove = function(e){
+      x2 =     e.clientX; 
+      y2 =     e.clientY;
+       draw();  
+   }
+    control2.onmousedown = down22;
+    
+}
+
+function down22(e){
+	canvas.onmousemove = null;
+	control2.onmousedown = down2;
+	
+}
+
+
+
+function down3(e){  
+   canvas.onmousemove = function(e){
+      startx =     e.clientX; 
+      starty =     e.clientY;
+       draw();  
+   }
+    int1.onmousedown = down33;
+    
+}
+
+function down33(e){
+	canvas.onmousemove = null;
+	int1.onmousedown = down3;
+	
+}
+
+
+
+function down4(e){  
+   canvas.onmousemove = function(e){
+      endx =     e.clientX; 
+      endy =     e.clientY;
+       draw();  
+   }
+    int2.onmousedown = down44;
+    
+}
+
+function down44(e){
+	canvas.onmousemove = null;
+	int2.onmousedown = down4;
+	
+}
+
+function draw(){
+
+     canvas.width = canvas.width;
+
+    control1.style.left = (x1-15) + "px";
+    control1.style.top = (y1-15) + "px";
+
+
+    control2.style.left = (x2-15) + "px";
+    control2.style.top = (y2-15) + "px";
+
+    int1.style.left = (startx-5) + "px";
+    int1.style.top = (starty-5) + "px";
+
+    int2.style.left = (endx-5) + "px";
+    int2.style.top = (endy-5) + "px";
+
+
+    //Vertical
+    ctx.moveTo(500, 0);
+    ctx.lineTo(500, 700);
+    ctx.stroke(); 
+
+    //Hori
+    ctx.moveTo(0, 350);
+    ctx.lineTo(1000, 350);
+    ctx.stroke(); 
+
+    //beizer curve
+    ctx.beginPath();
+    ctx.moveTo(startx, starty);
+    ctx.bezierCurveTo(x1, y1,x2, y2,endx, endy);
+    ctx.stroke();
+
+}
+
+draw();
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
